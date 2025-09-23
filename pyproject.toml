@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydantic-tests"
+version = "0.1.0"
+description = "Sample project comparing Pydantic v1.10.23 and v2.11.9 for a class validation model."
+authors = [
+    { name = "Wallace Espindola", email = "wallace.espindola@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # --- Uncomment ONE of the following depending on which version you want to test ---
+    "pydantic==1.10.23", # -- Pydantic v1.x --
+    #"pydantic==2.11.9", # -- Pydantic v2.x --
+    "email-validator>=2.2.0",
+    "pytest>=8.0.0",
+
+    # If your environment/mirror sometimes misses this (v2 pulls it in transitively),
+    # you can optionally un-comment this line to be explicit:
+    # annotated-types>=0.6,<0.8
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "mypy",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+#addopts = "-q" # sillent mode
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
